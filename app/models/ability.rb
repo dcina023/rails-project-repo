@@ -1,0 +1,12 @@
+class Ability
+  include CanCan::Ability
+
+  def initialize(user)
+    return unless user
+
+    can :read, User, id: user.id
+    can :manage, Plan, user_id: user.id
+    can :read, Interest
+    can :manage, PlanInterest, plan: { user_id: user.id }
+  end
+end
