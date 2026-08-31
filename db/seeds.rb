@@ -20,7 +20,7 @@ User.destroy_all
 
 puts "Creating users..."
 
-users = 10.times.map do
+users = Array.new(10) do
   User.create!(
     name: Faker::Name.name,
     email: Faker::Internet.unique.email,
@@ -41,7 +41,7 @@ interest_data = [
   ["Wellness", "Yoga, spas, fitness, and relaxing experiences"],
   ["Culture", "Historical sites, cultural events, and neighborhood exploring"],
   ["Games", "Arcades, board game cafes, trivia, and interactive activities"],
-  ["Movies", "Theaters, screenings, film events, and cozy movie nights"]
+  ["Movies", "Theaters, screenings, film events, and cozy movie nights"],
 ]
 
 interests = interest_data.map do |name, description|
@@ -53,17 +53,17 @@ end
 
 puts "Creating plans..."
 
-vibes = [
-  "Chill",
-  "Romantic",
-  "Adventurous",
-  "Creative",
-  "Cozy",
-  "Social",
-  "Budget-friendly",
-  "Upscale",
-  "Relaxed",
-  "Spontaneous"
+vibes = %w[
+  Chill
+  Romantic
+  Adventurous
+  Creative
+  Cozy
+  Social
+  Budget-friendly
+  Upscale
+  Relaxed
+  Spontaneous
 ]
 
 locations = [
@@ -74,7 +74,7 @@ locations = [
   "Hoboken, NJ",
   "Philadelphia, PA",
   "Boston, MA",
-  "Washington, DC"
+  "Washington, DC",
 ]
 
 30.times do

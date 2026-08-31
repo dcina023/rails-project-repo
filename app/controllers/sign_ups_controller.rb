@@ -23,7 +23,7 @@ class SignUpsController < ApplicationController
     end
   end
 
-  private
+private
 
   def redirect_if_logged_in
     redirect_to plans_path if logged_in?
