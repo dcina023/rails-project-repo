@@ -1,6 +1,4 @@
-# rails-project-repo
-
-## Cina-New-Scene
+# Cina-New-Scene - User Stories
 
 ### Cina-New-Scene is a meetup-planning application that generates personal itineraries based on a user's location, budget, interests, and desired vibe.
 
