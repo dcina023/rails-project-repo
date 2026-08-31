@@ -1,0 +1,19 @@
+<h1>Log In</h1>
+
+<%= form_with url: sessions_path, scope: :login, local: true do |form| %>
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div>
+    <%= form.submit "Log In" %>
+  </div>
+<% end %>
+
+<%= link_to "Create an account", new_sign_up_path %>

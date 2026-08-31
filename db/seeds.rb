@@ -23,7 +23,9 @@ puts "Creating users..."
 users = Array.new(10) do
   User.create!(
     name: Faker::Name.name,
-    email: Faker::Internet.unique.email
+    email: Faker::Internet.unique.email,
+    password: "password123",
+    password_confirmation: "password123"
   )
 end
 
@@ -97,3 +99,4 @@ puts "#{User.count} users created"
 puts "#{Interest.count} interests created"
 puts "#{Plan.count} plans created"
 puts "#{PlanInterest.count} plan interests created"
+puts "Seeded user password: password123"
