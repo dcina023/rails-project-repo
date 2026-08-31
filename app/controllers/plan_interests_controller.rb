@@ -1,0 +1,2 @@
+class PlanInterestsController < ApplicationController
+end
