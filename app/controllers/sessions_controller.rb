@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  load_and_authorize_resource
   def new; end
 
   def create
@@ -15,6 +16,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to login_path, notice: "Logged out successfully."
+    redirect_to root_path, notice: "Logged out successfully."
   end
 end
