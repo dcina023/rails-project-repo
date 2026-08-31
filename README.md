@@ -1,16 +1,18 @@
-# Cina-New-Scene - User Stories
+# Cina New-Scene: User Stories
 
-### Cina-New-Scene is a meetup-planning application that generates personal itineraries based on a user's location, budget, interests, and desired vibe.
+- Cina New-Scene is a meetup-planning application that generates personal itineraries based on a user's location, budget, interests, and desired vibe.
 
-Users will be able to create and save plans, select multiple interests, and receive a suggested itinerary that fits their preferences.
+- Users will be able to create and save plans, select multiple interests, and receive a suggested itinerary that fits their preferences.
 
-The main models will be User, Plan, Interest, and PlanInterest.
+### Models and Associations: 
 
-A user will have many plans, and each plan will belong to a user.
+- The main models will be User, Plan, Interest, and PlanInterest.
 
-Plans will have many interests through the PlanInterest join model, allowing users to select multiple interests for each meetup they create.
+- A user will have many plans, and each plan will belong to a user.
 
-## Features
+- Plans will have many interests through the PlanInterest join model, allowing users to select multiple interests for each meetup they create.
+
+## Features:
 
 1. Create a plan  
    As a user, I want to create a meetup plan using my location, budget, interests, and desired vibe so that I can receive an outing that fits my preferences.
