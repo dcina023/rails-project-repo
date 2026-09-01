@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
 
   resources :sign_ups, only:[:new, :create]
-  resources :users, only:[:show]
-  resources :plans
+  resources :users, only:[:show] do
+  resources :plans, only:[:show, :new, :create]
   resources :interests
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -22,4 +22,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+end
 end

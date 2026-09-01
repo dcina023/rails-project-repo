@@ -9,6 +9,8 @@
 #   end
 #
 #
+# db/seeds.rb
+
 require "faker"
 
 puts "Clearing existing data..."
@@ -31,70 +33,59 @@ end
 
 puts "Creating interests..."
 
-interest_data = [
-  ["Food", "Restaurants, cafes, bakeries, and unique dining experiences"],
-  ["Music", "Live music, concerts, open mics, and local performances"],
-  ["Art", "Museums, galleries, exhibits, and creative workshops"],
-  ["Outdoors", "Parks, walking trails, gardens, and outdoor activities"],
-  ["Shopping", "Boutiques, markets, thrift stores, and local shops"],
-  ["Nightlife", "Bars, lounges, dancing, and late-night events"],
-  ["Wellness", "Yoga, spas, fitness, and relaxing experiences"],
-  ["Culture", "Historical sites, cultural events, and neighborhood exploring"],
-  ["Games", "Arcades, board game cafes, trivia, and interactive activities"],
-  ["Movies", "Theaters, screenings, film events, and cozy movie nights"],
-]
-
-interests = interest_data.map do |name, description|
+interests = %w[
+  Food
+  Music
+  Art
+  Outdoors
+  Nightlife
+  History
+  Shopping
+  Wellness
+  Sports
+  Coffee
+].map do |name|
   Interest.create!(
     name: name,
-    description: description
+    description: Faker::Lorem.sentence(word_count: 8)
   )
 end
 
 puts "Creating plans..."
 
-vibes = %w[
-  Chill
-  Romantic
-  Adventurous
-  Creative
-  Cozy
-  Social
-  Budget-friendly
-  Upscale
-  Relaxed
-  Spontaneous
-]
-
-locations = [
-  "New York, NY",
-  "Brooklyn, NY",
-  "Queens, NY",
-  "Jersey City, NJ",
-  "Hoboken, NJ",
-  "Philadelphia, PA",
-  "Boston, MA",
-  "Washington, DC",
-]
-
-30.times do
-  plan = Plan.create!(
-    title: "#{Faker::Adjective.positive.capitalize} #{Faker::Restaurant.type.capitalize} Meetup",
-    location: locations.sample,
-    budget: rand(20.0..150.0).round(2),
-    vibe: vibes.sample,
-    user: users.sample
+plans = Array.new(10) do
+  Plan.create!(
+    user: users.sample,
+    title: Faker::Lorem.sentence(word_count: 3).delete_suffix("."),
+    location: "#{Faker::Address.city}, #{Faker::Address.state_abbr}",
+    budget: Faker::Number.decimal(l_digits: 3, r_digits: 2),
+    vibe: %w[
+      relaxed
+      adventurous
+      romantic
+      family-friendly
+      luxury
+      budget-conscious
+      spontaneous
+      cultural
+    ].sample
   )
+end
 
-  interests.sample(rand(2..4)).each do |interest|
+puts "Creating plan interests..."
+
+plans.each do |plan|
+  interests.sample(rand(2..5)).each do |interest|
     PlanInterest.create!(
       plan: plan,
-      interest: interest
+      interest: interest,
+      rating: rand(1..5),
+      notes: Faker::Lorem.sentence(word_count: 10)
     )
   end
 end
 
-puts "Seed data created successfully!"
+puts "Seed complete!"
 puts "#{User.count} users created"
 puts "#{Interest.count} interests created"
 puts "#{Plan.count} plans created"

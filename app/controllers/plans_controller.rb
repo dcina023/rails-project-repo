@@ -7,11 +7,13 @@ class PlansController < ApplicationController
   end
 
   def show
-    @plan = Plan.find(params[:id])
+    @user = User.find(params[:user_id])
+    @plan = @user.plans.find(params[:id])
   end
 
   def new
-    @plan = Plan.new
+    @user = User.find(params[:user_id])
+    @plan = @user.plans.new
   end
 
   def create
