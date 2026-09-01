@@ -1,1 +1,26 @@
 <h1> Fill out form to generate an itinerary </h1>
+<%= form_with model: [@user, @plan] do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+
+  <%= form.label :location %>
+  <%= form.text_field :location %>
+
+  <%= form.label :vibe %>
+  <%= form.text_field :vibe %>
+
+  <%= form.label :budget %>
+  <%= form.number_field :budget, step: 0.01 %>
+
+  <%= label_tag :interest_id, "Interest" %>
+  <%= select_tag :interest_id,
+      options_from_collection_for_select(@interests, :id, :name) %>
+
+  <%= label_tag :notes, "Notes" %>
+  <%= text_area_tag :notes %>
+
+  <%= label_tag :rating, "Rating" %>
+  <%= number_field_tag :rating, nil, min: 1, max: 5 %>
+
+  <%= form.submit "Create Plan" %>
+<% end %>

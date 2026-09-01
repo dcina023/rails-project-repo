@@ -14,10 +14,25 @@ class PlansController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @plan = @user.plans.new
+    @interests = Interest.all
   end
 
   def create
-    @plan = Plan.new(plan_params)
+    @user = User.find(params[:user_id])
+    @plan = @user.plans.new(plan_params)
+
+    if @plan.save
+      @plan.plan_interests.create!(
+        interest_id: params[:interest_id],
+        notes: params[:notes],
+        rating: params[:rating]
+      )
+
+      redirect_to user_plan_path(@user, @plan)
+    else
+      @interest = Interest.all
+      render :new, status: :unprocesable_entity
+    end
   end
 
 private
