@@ -9,13 +9,18 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.html do
         redirect_to root_path, alert: exception.message
-      end ## normal web request
+      end
+      ## normal web request
 
       format.turbo_stream do
         redirect_to root_path, alert: exception.message
-      end ## turbo web request like form submissions and page updates
+      end
+      ## turbo web request like form submissions and page updates
 
-      format.json { head :forbidden } ## usually requested by another program - returns a 403 Forbidden status w/ no response body
+      ## usually requested by another program - returns a 403 Forbidden status w/ no response body
+      format.json do
+        head :forbidden
+      end
     end
   end
 

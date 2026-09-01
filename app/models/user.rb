@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :plans
   has_many :interests, through: :plans
 
-  normalizes :email, with: ->(email) { email.strip.downcase } 
+  normalizes :email, with: ->(email) { email.strip.downcase }
   validates :name, presence: true
 
   has_secure_password

@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :require_user
-  load_and_authorize_resource through: :current_user 
+  load_and_authorize_resource through: :current_user
 
   def index
     @plans = Plan.all
