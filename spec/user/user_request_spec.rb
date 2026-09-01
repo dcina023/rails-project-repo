@@ -18,3 +18,7 @@ RSpec.describe "Users", type: :request do
     end
   end
 end
+
+## - remember - this is considered a full integration test, it runs through the whole Rails stack, executing routing, controller hooks, database queries, and view rendering.
+
+## You could separately test views and routing.

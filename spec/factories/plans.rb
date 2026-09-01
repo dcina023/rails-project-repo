@@ -4,6 +4,6 @@ FactoryBot.define do
     location { "Minneapolis, MN" }
     vibe { "Artsty" }
     budget { 40.0 }
-    user_id { 2 }
+    association :user
   end
 end

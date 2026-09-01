@@ -11,7 +11,7 @@ RSpec.describe Plan, type: :model do
       expect(plan).to validate_presence_of(:location)
     end
   end
-describe '#associations' do
+  describe '#associations' do
   it "belongs to a user" do
       expect(plan).to belong_to(:user)
     end
