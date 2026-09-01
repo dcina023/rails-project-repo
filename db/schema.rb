@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_31_174541) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_01_132905) do
   create_table "interests", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "description"
@@ -21,7 +21,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_31_174541) do
   create_table "plan_interests", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "interest_id", null: false
+    t.string "notes"
     t.integer "plan_id", null: false
+    t.integer "rating"
     t.datetime "updated_at", null: false
     t.index ["interest_id"], name: "index_plan_interests_on_interest_id"
     t.index ["plan_id"], name: "index_plan_interests_on_plan_id"
