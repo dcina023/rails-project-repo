@@ -1,1 +1,10 @@
-<%= link_to "Home", root_path, class: "nav-link" %>
+<nav>
+  <% if logged_in? %>
+    <%= link_to "My Plans", user_path(current_user) %>
+    <%= link_to "New Plan", new_user_plan_path(current_user) %>
+    <%= button_to "Log out", logout_path, method: :delete, class: "logout-button" %>
+  <% else %>
+    <%= link_to "Sign Up", new_sign_up_path %>
+    <%= link_to "Home", root_path %>
+  <% end %>
+</nav>
