@@ -14,7 +14,8 @@
   <% end %>
 <% end %>
 
-<h3> Explore new places! </h3>
-<p>Generate a new plan</p>
+<h3> Fill out form below to start exploring new places</h3>
+
+<li><%= link_to "Generate a new plan", new_user_plan_path(@user)%>
 
 <%= button_to "Log out", logout_path, method: :delete, class: "logout-button" %>
