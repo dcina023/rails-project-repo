@@ -33,17 +33,17 @@ end
 
 puts "Creating interests..."
 
-interests = [
-  "Food",
-  "Music",
-  "Art",
-  "Outdoors",
-  "Nightlife",
-  "History",
-  "Shopping",
-  "Wellness",
-  "Sports",
-  "Coffee"
+interests = %w[
+  Food
+  Music
+  Art
+  Outdoors
+  Nightlife
+  History
+  Shopping
+  Wellness
+  Sports
+  Coffee
 ].map do |name|
   Interest.create!(
     name: name,
@@ -53,21 +53,21 @@ end
 
 puts "Creating plans..."
 
-plans = 20.times.map do
+plans = Array.new(10) do
   Plan.create!(
     user: users.sample,
     title: Faker::Lorem.sentence(word_count: 3).delete_suffix("."),
     location: "#{Faker::Address.city}, #{Faker::Address.state_abbr}",
     budget: Faker::Number.decimal(l_digits: 3, r_digits: 2),
-    vibe: [
-      "relaxed",
-      "adventurous",
-      "romantic",
-      "family-friendly",
-      "luxury",
-      "budget-conscious",
-      "spontaneous",
-      "cultural"
+    vibe: %w[
+      relaxed
+      adventurous
+      romantic
+      family-friendly
+      luxury
+      budget-conscious
+      spontaneous
+      cultural
     ].sample
   )
 end
