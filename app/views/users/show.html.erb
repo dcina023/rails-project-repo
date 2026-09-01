@@ -1,5 +1,21 @@
-<h1>Welcome to Cina New-Scene!</h1>
+<h1>Welcome "<%=@user.name%>" to Cina New-Scene!</h1>
 
-<p>Start exploring new places</p>
+
+<p>View your saved plans!</p>
+
+<% @plans.each do |plan| %>
+  <h3><%= plan.title %></h3>
+
+  <% plan.plan_interests.each do |plan_interest| %>
+    <p>
+      <%= plan_interest.interest.name %>
+      <%= plan_interest.rating %>
+      <%= plan_interest.notes %>
+    </p>
+  <% end %>
+<% end %>
+
+<h3> Explore new places! </h3>
+<p>Generate a new plan</p>
 
 <%= button_to "Log out", logout_path, method: :delete, class: "logout-button" %>
