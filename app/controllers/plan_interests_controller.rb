@@ -1,4 +1,4 @@
-class PlanInterestsController < ApplicationController
+class PlanActivitiesController < ApplicationController
   def new; end
 
   def create; end
