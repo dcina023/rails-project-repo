@@ -5,12 +5,10 @@ RSpec.describe "Users", type: :request do
 
   describe "#show" do
     it "returns a successful response" do
-      post sessions_path, params: {
-        login: {
+      post login_path, params: {
           email: user.email,
           password: "password"
         }
-      }
 
       get user_path(user)
 

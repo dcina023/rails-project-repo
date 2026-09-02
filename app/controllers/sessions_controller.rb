@@ -1,10 +1,12 @@
 class SessionsController < ApplicationController
-  def new; end
+  def home; end
+
+  def login; end
 
   def create
-    user = User.find_by(email: params[:login][:email].downcase)
+    user = User.find_by(email: params[:email].downcase)
 
-    if user&.authenticate(params[:login][:password])
+    if user&.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to user_path(current_user), notice: "Welcome back!"
     else

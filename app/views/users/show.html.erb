@@ -1,15 +1,15 @@
 <h1>Welcome "<%=@user.name%>" to Cina New-Scene!</h1>
 
-<p>View your saved plans!</p>
+<p>View your saved game plans</p>
 
 <% @plans.each do |plan| %>
   <h3><%= link_to plan.title, user_plan_path(@user, plan) %></h3> 
 
   <% plan.plan_interests.each do |plan_interest| %>
-    <ol>
-     <li>Interest: <%= plan_interest.interest.name%></li>
+    <ul>
+     <li>Interest: #<%= plan_interest.interest.name%></li>
      <li>Rating:  <%= plan_interest.rating %></li>
       <li>Notes:  <%= plan_interest.notes %></li>
-    </ol>
+    </ul>
   <% end %>
 <% end %>
