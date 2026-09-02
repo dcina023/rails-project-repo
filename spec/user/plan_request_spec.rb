@@ -4,12 +4,10 @@ RSpec.describe "Plans", type: :request do
   let(:plan) { FactoryBot.create(:plan) }
 
   before do
-   post sessions_path, params: {
-    login: {
+   post login_path, params: {
     email: plan.user.email,
     password: "password"
-  }
-}
+   }
 end
   describe "#show" do
     it "returns a successful response" do

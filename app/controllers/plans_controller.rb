@@ -2,10 +2,6 @@ class PlansController < ApplicationController
   before_action :require_user
   load_and_authorize_resource through: :current_user
 
-  def index
-    @plans = Plan.all
-  end
-
   def show
     @user = User.find(params[:user_id])
     @plan = @user.plans.find(params[:id])
@@ -14,7 +10,7 @@ class PlansController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @plan = @user.plans.new
-    @interests = Interest.all
+    @activities = Activity.all
   end
 
   def create
@@ -22,16 +18,11 @@ class PlansController < ApplicationController
     @plan = @user.plans.new(plan_params)
 
     if @plan.save
-      @plan.plan_interests.create!(
-        interest_id: params[:interest_id],
-        notes: params[:notes],
-        rating: params[:rating]
-      )
-
+      @plan.add_random_activities(3)
       redirect_to user_plan_path(@user, @plan)
     else
-      @interest = Interest.all
-      render :new, status: :unprocesable_entity
+      @activities = Activity.all
+      render :new, status: :unprocessable_entity
     end
   end
 

@@ -5,12 +5,10 @@ RSpec.describe "Users", type: :request do
 
   describe "#show" do
     it "returns a successful response" do
-      post sessions_path, params: {
-        login: {
+      post login_path, params: {
           email: user.email,
           password: "password"
         }
-      }
 
       get user_path(user)
 
@@ -18,7 +16,3 @@ RSpec.describe "Users", type: :request do
     end
   end
 end
-
-## - remember - this is considered a full integration test, it runs through the whole Rails stack, executing routing, controller hooks, database queries, and view rendering.
-
-## You could separately test views and routing.
