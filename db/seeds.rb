@@ -46,7 +46,7 @@ interests = [
   ["Cats", "Enjoy cat-friendly spaces, cafes, shelters, and feline-focused experiences."],
   ["Nature", "Connect with trails, gardens, wildlife, and peaceful natural settings."],
   ["Sports", "Catch games, join activities, and explore local athletic experiences."],
-  ["Coffee", "Find cozy cafes, espresso bars, roasters, and favorite coffee stops."]
+  ["Coffee", "Find cozy cafes, espresso bars, roasters, and favorite coffee stops."],
 ].map do |name, description|
   Interest.create!(
     name: name,
@@ -66,7 +66,7 @@ plan_titles = [
   "Historic Downtown Walk",
   "Beach Picnic",
   "Boutique Shopping Day",
-  "Spa And Wellness Escape"
+  "Spa And Wellness Escape",
 ]
 
 plans = Array.new(10) do
@@ -100,7 +100,7 @@ plan_interest_notes = [
   "Pairs well with nearby food, coffee, or shopping stops.",
   "A simple way to make the plan feel more local and memorable.",
   "Best for a low-pressure stop that does not require much planning.",
-  "Adds a fun shared experience without stretching the budget too much."
+  "Adds a fun shared experience without stretching the budget too much.",
 ]
 
 plans.each do |plan|
