@@ -6,8 +6,8 @@ class Ability
 
     can :read, User, id: user.id
     can :manage, Plan, user_id: user.id
-    can :read, Interest
-    can :manage, PlanInterest, plan: { user_id: user.id }
+    can :read, Activity
+    can :manage, PlanActivity, plan: { user_id: user.id }
   end
 end
 

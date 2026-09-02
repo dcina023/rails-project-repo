@@ -1,4 +1,4 @@
-<h1> Fill out form to generate an itinerary </h1>
+<h1> Build your plan and discover three random activities </h1>
 <%= form_with model: [@user, @plan] do |form| %>
   <%= form.label :title %>
   <%= form.text_field :title %>
@@ -12,9 +12,9 @@
   <%= form.label :budget %>
   <%= form.number_field :budget, step: 0.01 %>
 
-  <%= label_tag :interest_id, "Interest" %>
-  <%= select_tag :interest_id,
-      options_from_collection_for_select(@interests, :id, :name) %>
+  <%= label_tag :activity_id, "Activity" %>
+  <%= select_tag :activity_id,
+      options_from_collection_for_select(@activities, :id, :name) %>
 
   <%= label_tag :notes, "Notes" %>
   <%= text_area_tag :notes %>
@@ -22,5 +22,5 @@
   <%= label_tag :rating, "Rating" %>
   <%= number_field_tag :rating, nil, min: 1, max: 5 %>
 
-  <%= form.submit "Create Plan" %>
+ <li><%= form.submit "Generate" %></li>
 <% end %>

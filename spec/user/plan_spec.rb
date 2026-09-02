@@ -15,11 +15,11 @@ RSpec.describe Plan, type: :model do
   it "belongs to a user" do
       expect(plan).to belong_to(:user)
     end
-  it "has many plan interests" do
-      expect(plan).to have_many(:plan_interests)
+  it "has many plan activities" do
+      expect(plan).to have_many(:plan_activities)
       end
-  it "has many interests through plan interests" do
-    expect(plan).to have_many(:interests).through(:plan_interests)
+  it "has many activities through plan activities" do
+    expect(plan).to have_many(:activities).through(:plan_activities)
   end
   end
 end
