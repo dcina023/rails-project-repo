@@ -1,4 +1,4 @@
-class Activities < ApplicationRecord
+class Activity < ApplicationRecord
   has_many :plan_activities
   has_many :plans, through: :plan_activities
 
