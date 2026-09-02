@@ -10,23 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_02_205808) do
-  create_table "activities", force: :cascade do |t|
+ActiveRecord::Schema[8.1].define(version: 2026_09_01_132905) do
+  create_table "interests", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "description"
     t.string "name"
     t.datetime "updated_at", null: false
   end
 
-  create_table "plan_activities", force: :cascade do |t|
-    t.integer "activity_id", null: false
+  create_table "plan_interests", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.integer "interest_id", null: false
     t.string "notes"
     t.integer "plan_id", null: false
     t.integer "rating"
     t.datetime "updated_at", null: false
-    t.index ["activity_id"], name: "index_plan_activities_on_activity_id"
-    t.index ["plan_id"], name: "index_plan_activities_on_plan_id"
+    t.index ["interest_id"], name: "index_plan_interests_on_interest_id"
+    t.index ["plan_id"], name: "index_plan_interests_on_plan_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -48,7 +48,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_205808) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "plan_activities", "activities"
-  add_foreign_key "plan_activities", "plans"
+  add_foreign_key "plan_interests", "interests"
+  add_foreign_key "plan_interests", "plans"
   add_foreign_key "plans", "users"
 end

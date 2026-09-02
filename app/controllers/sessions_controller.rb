@@ -1,17 +1,15 @@
 class SessionsController < ApplicationController
-  def home; end
-
-  def login; end
+  def new; end
 
   def create
-    user = User.find_by(email: params[:email].downcase)
+    user = User.find_by(email: params[:login][:email].downcase)
 
-    if user&.authenticate(params[:password])
+    if user&.authenticate(params[:login][:password])
       session[:user_id] = user.id
       redirect_to user_path(current_user), notice: "Welcome back!"
     else
       flash.now[:alert] = "Invalid email or password combination."
-      render :home, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
