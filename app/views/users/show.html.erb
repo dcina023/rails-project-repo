@@ -5,11 +5,11 @@
 <% @plans.each do |plan| %>
   <h3><%= link_to plan.title, user_plan_path(@user, plan) %></h3> 
 
-  <% plan.plan_interests.each do |plan_interest| %>
+  <% plan.plan_activities.each do |plan_activity| %>
     <ul>
-     <li>Activity: #<%= plan_interest.interest.name%></li>
-     <li>Rating:  <%= plan_interest.rating %></li>
-      <li>Notes:  <%= plan_interest.notes %></li>
+     <li>Activity: #<%= plan_activity.activity.name%></li>
+     <li>Rating:  <%= plan_activity.rating %></li>
+      <li>Notes:  <%= plan_activity.notes %></li>
     </ul>
   <% end %>
 <% end %>

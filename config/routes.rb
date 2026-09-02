@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :users, only:[:show] do
   resources :plans, only:[:show, :new, :create]
   
-  #Full RESTful Interest Routes
-  resources :interests
+  #Full RESTful Activity Routes
+  resources :activities
 end
 end

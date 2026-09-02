@@ -14,7 +14,7 @@ class PlansController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @plan = @user.plans.new
-    @interests = Interest.all
+    @activities = Activity.all
   end
 
 def create
@@ -22,10 +22,10 @@ def create
   @plan = @user.plans.new(plan_params)
 
   if @plan.save
-    @plan.add_random_interests(3)
+    @plan.add_random_activities(3)
     redirect_to user_plan_path(@user, @plan)
   else
-    @interests = Interest.all
+    @activities = Activity.all
     render :new, status: :unprocessable_entity
   end
 end

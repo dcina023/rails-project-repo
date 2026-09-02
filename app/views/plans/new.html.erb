@@ -12,9 +12,9 @@
   <%= form.label :budget %>
   <%= form.number_field :budget, step: 0.01 %>
 
-  <%= label_tag :interest_id, "Interest" %>
-  <%= select_tag :interest_id,
-      options_from_collection_for_select(@interests, :id, :name) %>
+  <%= label_tag :activity_id, "Activity" %>
+  <%= select_tag :activity_id,
+      options_from_collection_for_select(@activities, :id, :name) %>
 
   <%= label_tag :notes, "Notes" %>
   <%= text_area_tag :notes %>

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :plans
-  has_many :plan_interests, through: :interests
-  has_many :interests, through: :plan_interests
+  has_many :plan_activities, through: :activities
+  has_many :activities, through: :plan_activities
 
   normalizes :email, with: ->(email) { email.strip.downcase }
   validates :name, presence: true
