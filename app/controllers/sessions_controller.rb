@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       redirect_to user_path(current_user), notice: "Welcome back!"
     else
       flash.now[:alert] = "Invalid email or password combination."
-      render :new, status: :unprocessable_entity
+      render :home, status: :unprocessable_entity
     end
   end
 

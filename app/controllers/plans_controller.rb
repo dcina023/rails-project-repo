@@ -17,23 +17,18 @@ class PlansController < ApplicationController
     @interests = Interest.all
   end
 
-  def create
-    @user = User.find(params[:user_id])
-    @plan = @user.plans.new(plan_params)
+def create
+  @user = User.find(params[:user_id])
+  @plan = @user.plans.new(plan_params)
 
-    if @plan.save
-      @plan.plan_interests.create!(
-        interest_id: params[:interest_id],
-        notes: params[:notes],
-        rating: params[:rating]
-      )
-
-      redirect_to user_plan_path(@user, @plan)
-    else
-      @interest = Interest.all
-      render :new, status: :unprocesable_entity
-    end
+  if @plan.save
+    @plan.add_random_interests(3)
+    redirect_to user_plan_path(@user, @plan)
+  else
+    @interests = Interest.all
+    render :new, status: :unprocessable_entity
   end
+end
 
 private
 

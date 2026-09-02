@@ -1,4 +1,4 @@
-<h1> Fill out form to add a new stop to the list</h1>
+<h1> Build your plan and discover three random activities </h1>
 <%= form_with model: [@user, @plan] do |form| %>
   <%= form.label :title %>
   <%= form.text_field :title %>
@@ -22,5 +22,5 @@
   <%= label_tag :rating, "Rating" %>
   <%= number_field_tag :rating, nil, min: 1, max: 5 %>
 
-  <%= form.submit "Create Plan" %>
+ <li><%= form.submit "Generate" %></li>
 <% end %>
