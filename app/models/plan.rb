@@ -1,7 +1,7 @@
 class Plan < ApplicationRecord
   belongs_to :user
 
-  has_many :plan_activities
+  has_many :plan_activities, dependent: :destroy
   has_many :activities, through: :plan_activities
 
   validates :title, presence: true

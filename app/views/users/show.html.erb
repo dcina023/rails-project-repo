@@ -5,8 +5,12 @@
 <% @plans.each do |plan| %>
   <h3><%= link_to plan.title, user_plan_path(@user, plan) %></h3> 
   <%= link_to "Edit", edit_user_plan_path(@user, plan) %>
+  <%= button_to "Delete", [@user, plan], 
+              method: :delete, 
+              form: { data: { turbo_confirm: "Are you sure?" } }, 
+              class: "btn btn-danger" %>
 
-  <% plan.plan_activities.each do |plan_activity| %>
+<% plan.plan_activities.each do |plan_activity| %>
     <ul>
      <li>Activity: #<%= plan_activity.activity.name%></li>
      <li>Rating:  <%= plan_activity.rating %></li>
