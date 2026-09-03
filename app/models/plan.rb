@@ -12,7 +12,7 @@ class Plan < ApplicationRecord
   validates :vibe, inclusion: { in: VIBES }
 
   def assign_random_activities(count = 3)
-    Activity.random_for_vibe(self, count).each do |activity|
+    Activity.random_for_vibe(vibe, count).each do |activity|
       plan_activities.create!(
         activity: activity,
         notes: "Auto-selected for this plan.",

@@ -10,7 +10,7 @@ class Activity < ApplicationRecord
   scope :for_vibe, ->(vibe) { where(vibe: vibe) }
   scope :randomized, -> { order(Arel.sql("RANDOM()")) }
 
-  def self.random_for_vibe(plan, count = 3)
-    for_vibe(plan.vibe).randomized.limit(count)
+  def self.random_for_vibe(vibe, count = 3)
+    for_vibe(vibe).randomized.limit(count)
   end
 end

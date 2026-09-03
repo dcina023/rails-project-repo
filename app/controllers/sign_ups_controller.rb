@@ -30,6 +30,3 @@ private
     )
   end
 end
-## remember - setting a rate specificially with the create action is setting the number of requests
-## that are allowed within a specific time -- 3 mins. Additional attempts are redirected with an alert.
-## doesn't replace validations, authentication, or authorization.
