@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   stale_when_importmap_changes
-  ## generated application infrastructure
-
+  
   helper_method :current_user, :logged_in?
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -10,14 +9,11 @@ class ApplicationController < ActionController::Base
       format.html do
         redirect_to root_path, alert: exception.message
       end
-      ## normal web request
 
       format.turbo_stream do
         redirect_to root_path, alert: exception.message
       end
-      ## turbo web request like form submissions and page updates
 
-      ## usually requested by another program - returns a 403 Forbidden status w/ no response body
       format.json do
         head :forbidden
       end

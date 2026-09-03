@@ -27,6 +27,7 @@ class PlansController < ApplicationController
       redirect_to user_plan_path(current_user, @plan),
                   notice: "Plan updated successfully."
     else
+      @user = current_user
       render :edit, status: :unprocessable_entity
     end
   end
@@ -44,8 +45,7 @@ private
       :title,
       :location,
       :budget,
-      :vibe,
-      :user_id
+      :vibe
     )
   end
 end
