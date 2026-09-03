@@ -1,4 +1,5 @@
-<h1> Build your plan and discover three random activities </h1>
+<h1>Edit Plan</h1>
+
 <%= form_with model: [@user, @plan] do |form| %>
   <%= form.label :title %>
   <%= form.text_field :title %>
@@ -15,5 +16,5 @@
   <%= label_tag :notes, "Notes" %>
   <%= text_area_tag :notes %>
 
- <li><%= form.submit "Generate" %></li>
+ <li><%= form.submit "Edit" %></li>
 <% end %>

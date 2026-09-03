@@ -4,6 +4,7 @@
 
 <% @plans.each do |plan| %>
   <h3><%= link_to plan.title, user_plan_path(@user, plan) %></h3> 
+  <%= link_to "Edit", edit_user_plan_path(@user, plan) %>
 
   <% plan.plan_activities.each do |plan_activity| %>
     <ul>
