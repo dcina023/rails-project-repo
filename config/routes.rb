@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   #User Routes with Nested User Plans Routes
   resources :users, only:[:show] do
   resources :plans
+  end
   
   #Full RESTful Activity Routes
   resources :activities
-end
 end
