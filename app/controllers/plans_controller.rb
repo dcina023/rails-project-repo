@@ -28,7 +28,7 @@ class PlansController < ApplicationController
 
   def edit
     @user = User.find(params[:user_id])
-    @plan = @user.plans.find(params[:id]) 
+    @plan = @user.plans.find(params[:id])
   end
 
   def update
