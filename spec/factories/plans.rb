@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :plan do
+    association :user
     title { "Test Plan Title" }
     location { "Minneapolis, MN" }
-    vibe { "Artsty" }
     budget { 40.0 }
-    association :user
+    vibe { "Artsy" }
   end
 end
