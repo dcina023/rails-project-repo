@@ -9,12 +9,4 @@
               method: :delete, 
               form: { data: { turbo_confirm: "Are you sure?" } }, 
               class: "btn btn-danger" %>
-
-<% plan.plan_activities.each do |plan_activity| %>
-    <ul>
-     <li>Activity: #<%= plan_activity.activity.name%></li>
-     <li>Rating:  <%= plan_activity.rating %></li>
-      <li>Notes:  <%= plan_activity.notes %></li>
-    </ul>
-  <% end %>
-<% end %>
+<%end%>

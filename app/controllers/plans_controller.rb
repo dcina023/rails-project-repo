@@ -10,7 +10,7 @@ class PlansController < ApplicationController
 
   def create
     if @plan.save
-      @plan.add_random_activities(3)
+      @plan.assign_random_activities
       redirect_to user_plan_path(current_user, @plan)
     else
       @activities = Activity.all

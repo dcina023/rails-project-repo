@@ -7,12 +7,16 @@ class Plan < ApplicationRecord
   validates :title, presence: true
   validates :location, presence: true
 
-  def add_random_activities(count = 3)
-    Activity.order("RANDOM()").limit(count).each do |activity|
+  VIBES = %w[Artsy Foodie Outdoorsy Cozy Nightlife].freeze
+
+  validates :vibe, inclusion: { in: VIBES }
+
+  def assign_random_activities(count = 3)
+    Activity.random_for_vibe(self, count).each do |activity|
       plan_activities.create!(
         activity: activity,
-        rating: rand(1..5),
-        notes: "Generated activity"
+        notes: "Auto-selected for this plan.",
+        rating: rand(1..5)
       )
     end
   end
