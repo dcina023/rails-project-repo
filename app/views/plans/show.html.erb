@@ -5,3 +5,13 @@
   <li>What's the vibe?: <%= @plan.vibe %></li>
   <li>Will it break the bank?: <%= @plan.budget %></li>
 </ul>
+
+  <h2><%= @plan.title %></h2>
+
+  <% @plan.plan_activities.includes(:activity).each do |plan_activity| %>
+    <h3><%= plan_activity.activity.name %></h3>
+    <p><%= plan_activity.activity.description %></p>
+    <p>Notes: <%= plan_activity.notes %></p>
+    <p>Rating: <%= plan_activity.rating %></p>
+  <% end %>
+

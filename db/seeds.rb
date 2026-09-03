@@ -15,9 +15,9 @@ require "faker"
 
 puts "Clearing existing data..."
 
-PlanInterest.destroy_all
+PlanActivity.destroy_all
+Activity.destroy_all
 Plan.destroy_all
-Interest.destroy_all
 User.destroy_all
 
 puts "Creating users..."
@@ -31,26 +31,40 @@ users = Array.new(10) do
   )
 end
 
-puts "Creating interests..."
+puts "Creating activities..."
 
-interests = [
-  ["Food", "Discover local flavors, memorable meals, and favorite places to eat."],
-  ["Music", "Find live shows, listening spots, and experiences built around sound."],
-  ["Art", "Explore galleries, public art, creative workshops, and inspiring exhibitions."],
-  ["Outdoors", "Enjoy fresh-air activities, scenic routes, parks, and open spaces."],
-  ["Nightlife", "Check out bars, late-night venues, dancing, and evening entertainment."],
-  ["History", "Visit landmarks, museums, heritage sites, and stories from the past."],
-  ["Shopping", "Browse boutiques, markets, specialty shops, and unique local finds."],
-  ["Wellness", "Recharge with fitness, mindfulness, spas, movement, and healthy routines."],
-  ["Dogs", "Find dog-friendly places, parks, patios, and activities for pups."],
-  ["Cats", "Enjoy cat-friendly spaces, cafes, shelters, and feline-focused experiences."],
-  ["Nature", "Connect with trails, gardens, wildlife, and peaceful natural settings."],
-  ["Sports", "Catch games, join activities, and explore local athletic experiences."],
-  ["Coffee", "Find cozy cafes, espresso bars, roasters, and favorite coffee stops."],
-].map do |name, description|
-  Interest.create!(
+activities_data = [
+  ["Visit a local art museum", "Explore exhibits, installations, and visual art collections.", "Artsy"],
+  ["Take a pottery class", "Try a hands-on creative workshop with clay.", "Artsy"],
+  ["Explore a gallery district", "Walk through local galleries and artist-run spaces.", "Artsy"],
+  ["Find a public mural walk", "Discover colorful murals and street art around the city.", "Artsy"],
+
+  ["Try a brunch spot", "Enjoy a relaxed meal at a popular local brunch restaurant.", "Foodie"],
+  ["Visit a farmers market", "Browse fresh produce, baked goods, and local food vendors.", "Foodie"],
+  ["Go on a dessert crawl", "Sample sweets from bakeries, cafes, and dessert shops.", "Foodie"],
+  ["Book a tasting menu", "Enjoy a curated dining experience with multiple courses.", "Foodie"],
+
+  ["Walk a scenic trail", "Spend time outside on a relaxed nature walk or hike.", "Outdoorsy"],
+  ["Have a picnic in the park", "Pack snacks and enjoy an easy outdoor meal.", "Outdoorsy"],
+  ["Visit a botanical garden", "Explore plants, flowers, and peaceful garden paths.", "Outdoorsy"],
+  ["Rent bikes", "Ride through trails, parks, or bike-friendly neighborhoods.", "Outdoorsy"],
+
+  ["Visit a cozy bookstore", "Browse books and enjoy a calm, quiet atmosphere.", "Cozy"],
+  ["Settle into a coffee shop", "Relax with coffee, pastries, and conversation.", "Cozy"],
+  ["Watch an indie movie", "Catch a film at a small theater or cinema.", "Cozy"],
+  ["Try a tea house", "Enjoy tea, light snacks, and a slower-paced stop.", "Cozy"],
+
+  ["See live music", "Catch a band, open mic, or intimate local performance.", "Nightlife"],
+  ["Try a cocktail bar", "Visit a stylish bar with creative drinks.", "Nightlife"],
+  ["Go dancing", "Find a lively spot for music and dancing.", "Nightlife"],
+  ["See a comedy show", "Spend the evening at a stand-up or improv performance.", "Nightlife"],
+]
+
+activities = activities_data.map do |name, description, vibe|
+  Activity.create!(
     name: name,
-    description: description
+    description: description,
+    vibe: vibe
   )
 end
 
@@ -64,9 +78,9 @@ plan_titles = [
   "Live Music Night",
   "Farmers Market Morning",
   "Historic Downtown Walk",
-  "Beach Picnic",
-  "Boutique Shopping Day",
-  "Spa And Wellness Escape",
+  "Park Picnic",
+  "Gallery Afternoon",
+  "Cozy Saturday Escape",
 ]
 
 plans = Array.new(10) do
@@ -75,22 +89,13 @@ plans = Array.new(10) do
     title: plan_titles.sample,
     location: "#{Faker::Address.city}, #{Faker::Address.state_abbr}",
     budget: Faker::Number.decimal(l_digits: 3, r_digits: 2),
-    vibe: %w[
-      relaxed
-      adventurous
-      romantic
-      family-friendly
-      luxury
-      budget-conscious
-      spontaneous
-      cultural
-    ].sample
+    vibe: Plan::VIBES.sample
   )
 end
 
-puts "Creating plan interests..."
+puts "Creating plan activities..."
 
-plan_interest_notes = [
+plan_activity_notes = [
   "A strong fit for the plan and easy to include in the itinerary.",
   "Adds variety without taking the day too far off schedule.",
   "Good option for filling time between the main planned stops.",
@@ -104,19 +109,21 @@ plan_interest_notes = [
 ]
 
 plans.each do |plan|
-  interests.sample(rand(2..5)).each do |interest|
-    PlanInterest.create!(
+  matching_activities = activities.select { |activity| activity.vibe == plan.vibe }
+
+  matching_activities.sample(3).each do |activity|
+    PlanActivity.create!(
       plan: plan,
-      interest: interest,
-      rating: rand(1..5),
-      notes: plan_interest_notes.sample
+      activity: activity,
+      notes: plan_activity_notes.sample,
+      rating: rand(1..5)
     )
   end
 end
 
 puts "Seed complete!"
 puts "#{User.count} users created"
-puts "#{Interest.count} interests created"
+puts "#{Activity.count} activities created"
 puts "#{Plan.count} plans created"
-puts "#{PlanInterest.count} plan interests created"
+puts "#{PlanActivity.count} plan activities created"
 puts "Seeded user password: password123"
