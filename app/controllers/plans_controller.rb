@@ -13,7 +13,7 @@ class PlansController < ApplicationController
       @plan.assign_random_activities
       redirect_to user_plan_path(current_user, @plan)
     else
-      @activities = Activity.all
+      @user = current_user
       render :new, status: :unprocessable_entity
     end
   end

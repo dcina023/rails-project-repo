@@ -1,0 +1,24 @@
+<%= form_with model: [@user, @plan] do |form| %>
+  <% if form.object.errors.any? %>
+    <div class="alert">
+      Error: <%= form.object.errors.full_messages.first %>
+    </div>
+  <% end %>
+
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+
+  <%= form.label :location %>
+  <%= form.text_field :location %>
+
+  <%= form.label :vibe %>
+ <%= form.select :vibe, Plan::VIBES, { prompt: "Choose a vibe" }, { required: true } %>
+
+  <%= form.label :budget %>
+  <%= form.number_field :budget, step: 0.01 %>
+
+  <%= label_tag :notes, "Notes" %>
+  <%= text_area_tag :notes %>
+
+ <li><%= form.submit "Generate" %></li>
+<% end %>
