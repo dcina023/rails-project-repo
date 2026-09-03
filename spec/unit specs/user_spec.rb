@@ -20,4 +20,18 @@ RSpec.describe User, type: :model do
       expect(user).to have_many(:plans)
     end
   end
+
+  describe "#secure password" do
+    it "authenticates with the correct password" do
+        user = FactoryBot.create(:user, password: "password123", password_confirmation: "password123")
+
+      expect(user.authenticate("password123")).to eq(user)
+    end
+
+    it "does not authenticate with the wrong password" do
+      user = FactoryBot.create(:user, password: "password123", password_confirmation: "password123")
+
+      expect(user.authenticate("wrong-password")).to be(false)
+    end
+  end
 end
