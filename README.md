@@ -49,3 +49,6 @@ bin/rails s
 ## Open the app in your browser:
 http://localhost:3000/
 
+## Run unit and request specs
+
+bundle exec rspec
