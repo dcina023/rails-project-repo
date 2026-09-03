@@ -1,0 +1,150 @@
+:root {
+  --sand: #f7efe3;
+  --cream: #fffaf2;
+  --clay: #b86f52;
+  --terracotta: #c9825f;
+  --sage: #7f9270;
+  --olive: #5f6f52;
+  --charcoal: #2f2a25;
+  --muted: #76695f;
+  --border: #e3d4c1;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: var(--sand);
+  color: var(--charcoal);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--olive);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  color: var(--clay);
+}
+
+header,
+nav {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+}
+
+nav a {
+  margin-right: 1rem;
+}
+
+main {
+  width: min(1100px, 92%);
+  margin: 2rem auto;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--charcoal);
+  line-height: 1.2;
+}
+
+button,
+input[type="submit"] {
+  background: var(--clay);
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: var(--terracotta);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem;
+  margin: 0.35rem 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--cream);
+  color: var(--charcoal);
+  font: inherit;
+}
+
+.card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.hero {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  color: var(--muted);
+  max-width: 650px;
+}
+
+.adventure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.adventure-image {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.plan-list {
+  list-style: none;
+  padding: 0;
+}
+
+.plan-list li {
+  background: var(--cream);
+  border-left: 5px solid var(--sage);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+}
+
+.notice {
+  background: #eef3e7;
+  border: 1px solid #ccd9bf;
+  color: var(--olive);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+.alert {
+  background: #f8e7df;
+  border: 1px solid #e2b8a6;
+  color: #8a3f2d;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
