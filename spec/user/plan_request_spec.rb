@@ -1,7 +1,14 @@
 require "rails_helper"
+require "securerandom"
 
 RSpec.describe "Plans", type: :request do
-  let(:user) { FactoryBot.create(:user, password: "password") }
+  let(:user) do
+    FactoryBot.create(
+      :user,
+      email: "plan-spec-#{SecureRandom.hex(8)}@example.com",
+      password: "password"
+    )
+  end
   let(:plan) { FactoryBot.create(:plan, user: user) }
 
   before do
@@ -9,6 +16,8 @@ RSpec.describe "Plans", type: :request do
       email: user.email,
       password: "password"
     }
+
+    expect(response).to redirect_to(user_path(user))
   end
 
   describe "GET /users/:user_id/plans/:id" do
@@ -61,20 +70,13 @@ RSpec.describe "Plans", type: :request do
       expect(response).to redirect_to(user_plan_path(user, plan))
     end
   end
+describe "DELETE /users/:user_id/plans/:id" do
+ it "deletes an existing plan" do
+  plan
 
-  describe "DELETE /users/:user_id/plans/:id" do
-    it "deletes an existing plan" do
-      plan
-
-      expect do
-        delete user_plan_path(user, plan)
-      end.to change(Plan, :count).by(-1)
-    end
-
-    it "redirects to the user's show page" do
-      delete user_plan_path(user, plan)
-
-      expect(response).to redirect_to(user_path(user))
-    end
+  expect do
+    delete user_plan_path(user, plan)
+  end.to change(Plan, :count).by(-1)
   end
+end
 end
