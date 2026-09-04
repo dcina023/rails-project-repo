@@ -88,7 +88,7 @@ plans = Array.new(10) do
     user: users.sample,
     title: plan_titles.sample,
     location: "#{Faker::Address.city}, #{Faker::Address.state_abbr}",
-    budget: Faker::Commerce.price(range: 0..200.0),
+    budget: Faker::Commerce.price(range: 20..300.0),
     vibe: Plan::VIBES.sample
   )
 end
