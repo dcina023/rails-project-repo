@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :activities, through: :plan_activities
 
   normalizes :email, with: ->(email) { email.strip.downcase }
+  # validate :email, uniqueness: true, presence: true, case_sensitive: false
   validates :name, presence: true
 
   has_secure_password

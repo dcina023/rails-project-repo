@@ -1,33 +1,28 @@
 class PlansController < ApplicationController
   before_action :require_user
+  before_action :set_user
   load_and_authorize_resource through: :current_user
   def show; end
 
   def new
-    @user = current_user
     @activities = Activity.all
   end
 
   def create
     if @plan.save
-      @plan.assign_random_activities
       redirect_to user_plan_path(current_user, @plan)
     else
-      @user = current_user
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @user = current_user
-  end
+  def edit; end
 
   def update
     if @plan.update(plan_params)
       redirect_to user_plan_path(current_user, @plan),
                   notice: "Plan updated successfully."
     else
-      @user = current_user
       render :edit, status: :unprocessable_entity
     end
   end
@@ -47,5 +42,9 @@ private
       :budget,
       :vibe
     )
+  end
+
+  def set_user
+    @user = current_user
   end
 end
