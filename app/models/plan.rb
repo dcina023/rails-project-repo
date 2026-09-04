@@ -6,7 +6,7 @@ class Plan < ApplicationRecord
 
   validates :title, presence: true
   validates :location, presence: true
-
+  validates :budget, numericality: { less_than_or_equal_to: 200 }
   VIBES = %w[Artsy Foodie Outdoorsy Cozy Nightlife].freeze
 
   validates :vibe, inclusion: { in: VIBES }
