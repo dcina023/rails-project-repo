@@ -1,0 +1,9 @@
+<%= form_with model: @plan_activity do |form| %>
+  <%= form.label :notes %>
+  <%= form.text_area :notes %>
+
+  <%= form.label :rating %>
+  <%= form.number_field :rating, in: 1..5 %>
+
+  <%= form.submit "Update" %>
+<% end %>

@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   resources :users, only:[:show] do
   resources :plans
   end
+
+  resources :plan_activities, only: [:edit, :update]
 end
