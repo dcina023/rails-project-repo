@@ -1,2 +1,6 @@
 <h1>Edit Plan</h1>
-<%= render "form", user: @user, plan: @plan %>
+<%= render PlanFormComponent.new(
+  user: @user,
+  plan: @plan,
+  vibes: @vibes
+) %>

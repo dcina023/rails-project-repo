@@ -1,0 +1,50 @@
+<%= form_with model: [@user, @plan] do |form| %>
+  <% if @plan.errors.any? %>
+    <div class="alert">
+      <ul>
+        <% @plan.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :location %>
+    <%= form.text_field :location, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :vibe_id, "Vibe" %>
+
+    <%= form.collection_select(
+      :vibe_id,
+      @vibes,
+      :id,
+      :title,
+      { prompt: "Choose a vibe" },
+      { required: true }
+    ) %>
+  </div>
+
+  <div>
+    <%= form.label :budget %>
+
+    <%= form.number_field(
+      :budget,
+      min: 20,
+      max: 300,
+      step: 0.01,
+      required: true
+    ) %>
+  </div>
+
+  <div>
+    <%= form.submit submit_label %>
+  </div>
+<% end %>

@@ -1,7 +1,6 @@
 class Plan < ApplicationRecord
-  VIBES = %w[Artsy Foodie Outdoorsy Cozy Nightlife].freeze
-
   belongs_to :user
+  belongs_to :vibe
 
   has_many :plan_activities, dependent: :destroy
   has_many :activities, through: :plan_activities
@@ -12,12 +11,11 @@ class Plan < ApplicationRecord
     greater_than_or_equal_to: 20,
     less_than_or_equal_to: 300,
   }
-  validates :vibe, inclusion: { in: VIBES }
 
-  after_commit :assign_random_activities
+  after_create_commit :assign_random_activities
 
   def assign_random_activities(count = 3)
-    Activity.random_for_vibe(vibe, count).each do |activity|
+    vibe.random_activities(count).each do |activity|
       plan_activities.create!(
         activity: activity,
         notes: "Auto-selected for this plan.",

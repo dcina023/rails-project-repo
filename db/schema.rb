@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_03_170856) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_15_134954) do
   create_table "activities", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "description"
     t.string "name"
     t.datetime "updated_at", null: false
-    t.string "vibe"
+    t.integer "vibe_id"
+    t.index ["vibe_id"], name: "index_activities_on_vibe_id"
   end
 
   create_table "plan_activities", force: :cascade do |t|
@@ -37,8 +38,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_03_170856) do
     t.string "title"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.string "vibe"
+    t.integer "vibe_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
+    t.index ["vibe_id"], name: "index_plans_on_vibe_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,7 +51,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_03_170856) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "vibes", force: :cascade do |t|
+    t.text "caption"
+    t.datetime "created_at", null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "activities", "vibes"
   add_foreign_key "plan_activities", "activities"
   add_foreign_key "plan_activities", "plans"
   add_foreign_key "plans", "users"
+  add_foreign_key "plans", "vibes"
 end

@@ -1,2 +1,6 @@
 <h1> Build your plan and discover three random activities </h1>
-<%= render "form", user: @user, plan: @plan %>
+<%= render PlanFormComponent.new(
+  user: @user,
+  plan: @plan,
+  vibes: @vibes
+) %>

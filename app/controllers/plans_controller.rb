@@ -1,12 +1,13 @@
 class PlansController < ApplicationController
   before_action :require_user
   before_action :set_user
+  before_action :set_vibes, only: %i[new create edit update]
+
   load_and_authorize_resource through: :current_user
+
   def show; end
 
-  def new
-    @activities = Activity.all
-  end
+  def new; end
 
   def create
     if @plan.save
@@ -29,6 +30,7 @@ class PlansController < ApplicationController
 
   def destroy
     @plan.destroy
+
     redirect_to user_path(current_user),
                 notice: "Plan was successfully removed."
   end
@@ -40,11 +42,15 @@ private
       :title,
       :location,
       :budget,
-      :vibe
+      :vibe_id
     )
   end
 
   def set_user
     @user = current_user
+  end
+
+  def set_vibes
+    @vibes = Vibe.order(:title)
   end
 end
