@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :vibe do
-    title { "MyString" }
+    sequence(:title) { |n| "Vibe #{n}" }
     caption { "MyText" }
   end
 end

@@ -4,6 +4,6 @@ FactoryBot.define do
     title { "Test Plan Title" }
     location { "Minneapolis, MN" }
     budget { 40.0 }
-    vibe { "Artsy" }
+    association :vibe
   end
 end

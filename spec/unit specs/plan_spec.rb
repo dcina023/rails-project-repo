@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 RSpec.describe Plan, type: :model do
   subject(:plan) { FactoryBot.build(:plan) }
 
@@ -23,52 +23,55 @@ RSpec.describe Plan, type: :model do
   end
   end
 
-describe "VIBES" do
-    it "defines the allowed vibe options" do
-      expect(described_class::VIBES).to eq(%w[Artsy Foodie Outdoorsy Cozy Nightlife])
-    end
-
-    it "does not allow the vibe options to be modified" do
-      expect(described_class::VIBES).to be_frozen
+  describe "associations" do
+    it "belongs to a vibe" do
+      expect(plan).to belong_to(:vibe)
     end
   end
 
   describe "validations" do
-    it "is valid with an included vibe" do
-      plan = FactoryBot.build(:plan, vibe: "Artsy")
+    it "is valid with a vibe" do
+      plan = FactoryBot.build(:plan)
 
       expect(plan).to be_valid
     end
 
-    it "is invalid with a vibe outside the allowed list" do
-      plan = FactoryBot.build(:plan, vibe: "Adventurous")
+    it "is invalid without a vibe" do
+      plan = FactoryBot.build(:plan, vibe: nil)
 
       expect(plan).not_to be_valid
-      expect(plan.errors[:vibe]).to include("is not included in the list")
+      expect(plan.errors[:vibe]).to include("must exist")
     end
   end
 
   describe "#assign_random_activities" do
-    let(:plan) { FactoryBot.create(:plan, vibe: "Outdoorsy") }
+    let(:vibe) { FactoryBot.create(:vibe, title: "Outdoorsy") }
+    let(:plan) { FactoryBot.create(:plan, vibe: vibe) }
 
     let(:activities) do
       [
-        FactoryBot.create(:activity, vibe: "Outdoorsy"),
-        FactoryBot.create(:activity, vibe: "Outdoorsy"),
-        FactoryBot.create(:activity, vibe: "Outdoorsy")
+        FactoryBot.create(:activity, vibe: vibe),
+        FactoryBot.create(:activity, vibe: vibe),
+        FactoryBot.create(:activity, vibe: vibe)
       ]
     end
 
     before do
-      allow(Activity).to receive(:random_for_vibe)
-        .with("Outdoorsy", 3)
+      allow(vibe).to receive(:random_activities)
+        .with(3)
+        .and_return([])
+      plan
+      RSpec::Mocks.space.proxy_for(vibe).reset
+
+      allow(vibe).to receive(:random_activities)
+        .with(3)
         .and_return(activities)
     end
 
     it "fetches random activities for the plan vibe" do
       plan.assign_random_activities
 
-      expect(Activity).to have_received(:random_for_vibe).with("Outdoorsy", 3)
+      expect(vibe).to have_received(:random_activities).with(3)
     end
 
     it "creates plan activity records for the returned activities" do
@@ -98,13 +101,13 @@ describe "VIBES" do
     end
 
     it "uses the provided activity count" do
-      allow(Activity).to receive(:random_for_vibe)
-        .with("Outdoorsy", 2)
+      allow(vibe).to receive(:random_activities)
+        .with(2)
         .and_return(activities.first(2))
 
       plan.assign_random_activities(2)
 
-      expect(Activity).to have_received(:random_for_vibe).with("Outdoorsy", 2)
+      expect(vibe).to have_received(:random_activities).with(2)
       expect(plan.plan_activities.count).to eq(2)
     end
   end

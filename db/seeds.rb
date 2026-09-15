@@ -43,8 +43,8 @@ vibes_data = [
       ["Visit a local art museum", "Explore exhibits, installations, and visual art collections."],
       ["Take a pottery class", "Try a hands-on creative workshop with clay."],
       ["Explore a gallery district", "Walk through local galleries and artist-run spaces."],
-      ["Find a public mural walk", "Discover colorful murals and street art around the city."]
-    ]
+      ["Find a public mural walk", "Discover colorful murals and street art around the city."],
+    ],
   },
   {
     title: "Foodie",
@@ -53,8 +53,8 @@ vibes_data = [
       ["Try a brunch spot", "Enjoy a relaxed meal at a popular local brunch restaurant."],
       ["Visit a farmers market", "Browse fresh produce, baked goods, and local food vendors."],
       ["Go on a dessert crawl", "Sample sweets from bakeries, cafes, and dessert shops."],
-      ["Book a tasting menu", "Enjoy a curated dining experience with multiple courses."]
-    ]
+      ["Book a tasting menu", "Enjoy a curated dining experience with multiple courses."],
+    ],
   },
   {
     title: "Outdoorsy",
@@ -63,8 +63,8 @@ vibes_data = [
       ["Walk a scenic trail", "Spend time outside on a relaxed nature walk or hike."],
       ["Have a picnic in the park", "Pack snacks and enjoy an easy outdoor meal."],
       ["Visit a botanical garden", "Explore plants, flowers, and peaceful garden paths."],
-      ["Rent bikes", "Ride through trails, parks, or bike-friendly neighborhoods."]
-    ]
+      ["Rent bikes", "Ride through trails, parks, or bike-friendly neighborhoods."],
+    ],
   },
   {
     title: "Cozy",
@@ -73,8 +73,8 @@ vibes_data = [
       ["Visit a cozy bookstore", "Browse books and enjoy a calm, quiet atmosphere."],
       ["Settle into a coffee shop", "Relax with coffee, pastries, and conversation."],
       ["Watch an indie movie", "Catch a film at a small theater or cinema."],
-      ["Try a tea house", "Enjoy tea, light snacks, and a slower-paced stop."]
-    ]
+      ["Try a tea house", "Enjoy tea, light snacks, and a slower-paced stop."],
+    ],
   },
   {
     title: "Nightlife",
@@ -83,9 +83,9 @@ vibes_data = [
       ["See live music", "Catch a band, open mic, or intimate local performance."],
       ["Try a cocktail bar", "Visit a stylish bar with creative drinks."],
       ["Go dancing", "Find a lively spot for music and dancing."],
-      ["See a comedy show", "Spend the evening at a stand-up or improv performance."]
-    ]
-  }
+      ["See a comedy show", "Spend the evening at a stand-up or improv performance."],
+    ],
+  },
 ]
 
 vibes_by_title = vibes_data.each_with_object({}) do |vibe_data, vibes|
@@ -116,10 +116,10 @@ plans_data = [
   { title: "Historic Downtown Walk", vibe_title: "Outdoorsy" },
   { title: "Park Picnic", vibe_title: "Outdoorsy" },
   { title: "Gallery Afternoon", vibe_title: "Artsy" },
-  { title: "Cozy Saturday Escape", vibe_title: "Cozy" }
+  { title: "Cozy Saturday Escape", vibe_title: "Cozy" },
 ]
 
-plans = plans_data.map do |plan_data|
+plans_data.map do |plan_data|
   Plan.create!(
     user: users.sample,
     vibe: vibes_by_title.fetch(plan_data[:vibe_title]),

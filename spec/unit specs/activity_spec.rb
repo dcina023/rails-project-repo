@@ -1,6 +1,8 @@
+require "rails_helper"
+
 RSpec.describe Activity, type: :model do
   describe "validations" do
-    it "is valid with a name, description, and allowed vibe" do
+    it "is valid with a name, description, and vibe" do
       activity = FactoryBot.build(:activity)
 
       expect(activity).to be_valid
@@ -18,33 +20,17 @@ RSpec.describe Activity, type: :model do
       expect(activity).not_to be_valid
     end
 
-    it "is invalid with a vibe outside the allowed list" do
-      activity = FactoryBot.build(:activity, vibe: "Adventurous")
+    it "is invalid without a vibe" do
+      activity = FactoryBot.build(:activity, vibe: nil)
 
       expect(activity).not_to be_valid
-      expect(activity.errors[:vibe]).to include("is not included in the list")
+      expect(activity.errors[:vibe]).to include("must exist")
     end
   end
 
-  describe ".for_vibe" do
-    it "returns activities matching the given vibe" do
-      artsy_activity = FactoryBot.create(:activity, vibe: "Artsy")
-      foodie_activity = FactoryBot.create(:activity, vibe: "Foodie")
-
-      expect(Activity.for_vibe("Artsy")).to include(artsy_activity)
-      expect(Activity.for_vibe("Artsy")).not_to include(foodie_activity)
-    end
-  end
-
-  describe ".random_for_vibe" do
-    it "returns the requested number of activities for the given vibe" do
-      FactoryBot.create_list(:activity, 4, vibe: "Outdoorsy")
-      FactoryBot.create(:activity, vibe: "Cozy")
-
-      activities = Activity.random_for_vibe("Outdoorsy", 3)
-
-      expect(activities.count).to eq(3)
-      expect(activities).to all(have_attributes(vibe: "Outdoorsy"))
+  describe "associations" do
+    it "belongs to a vibe" do
+      expect(FactoryBot.build(:activity)).to belong_to(:vibe)
     end
   end
 end

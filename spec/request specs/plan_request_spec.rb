@@ -10,6 +10,7 @@ RSpec.describe "Plans", type: :request do
     )
   end
   let(:plan) { FactoryBot.create(:plan, user: user) }
+  let(:vibe) { FactoryBot.create(:vibe) }
 
   before do
     post login_path, params: {
@@ -41,7 +42,7 @@ RSpec.describe "Plans", type: :request do
       {
         title: "Test Plan Title",
         location: "Minneapolis, MN",
-        vibe: "Artsy",
+        vibe_id: vibe.id,
         budget: 40.0
       }
     end
